@@ -268,5 +268,17 @@ function xmldb_zoom_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2018091400, 'zoom');
     }
 
+    if ($oldversion < 2019021200) {
+        //Define field auto_recording to be added to zoom
+        $table = new xmldb_table('zoom');
+        $field = new xmldb_field('auto_recording',XMLDB_TYPE_CHAR, '9',null, XMLDB_NOTNULL, null, 'none', 'alternative_hosts');
+
+        // Conditionally launch add field auto_recording.
+        if ($dbman->field_exists($table, $field)) {
+            $dbman->drop_field($table, $field);
+        }
+        upgrade_mod_savepoint(true, 2019021200, 'zoom');
+    }
+
     return true;
 }

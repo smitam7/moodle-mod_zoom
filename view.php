@@ -79,6 +79,7 @@ $strstartvideopart = get_string('startpartjoins', 'mod_zoom');
 $straudioopt = get_string('option_audio', 'mod_zoom');
 $strstatus = get_string('status', 'mod_zoom');
 $strall = get_string('allmeetings', 'mod_zoom');
+$strautorec = get_string('auto_recording', 'mod_zoom');
 
 // Output starts here.
 echo $OUTPUT->header();
@@ -191,6 +192,7 @@ if (!$zoom->webinar) {
 }
 
 $table->data[] = array($straudioopt, get_string('audio_' . $zoom->option_audio, 'mod_zoom'));
+$table->data[] = array($strautorec, get_string('auto_rec_' . $zoom->auto_recording, 'mod_zoom'));
 
 if (!$zoom->recurring) {
     if (!$zoom->exists_on_zoom) {

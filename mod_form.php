@@ -176,6 +176,14 @@ class mod_zoom_mod_form extends moodleform_mod {
         $mform->addElement('hidden', 'host_id', zoom_get_user_id());
         $mform->setType('host_id', PARAM_ALPHANUMEXT);
 
+        //Add Auto recording option
+        $mform->addGroup(array(
+            $mform->createElement('radio', 'auto_recording', '', get_string('auto_rec_local', 'zoom'), ZOOM_REC_LOCAL),
+            $mform->createElement('radio', 'auto_recording', '', get_string('auto_rec_cloud', 'zoom'), ZOOM_REC_CLOUD),
+            $mform->createElement('radio', 'auto_recording', '', get_string('auto_rec_none', 'zoom'), ZOOM_REC_NONE)
+        ), null, get_string('auto_recording', 'zoom'));
+        $mform->setDefault('auto_recording', $config->autorecordingchoices);
+
         // Add standard grading elements.
         $this->standard_grading_coursemodule_elements();
         $mform->setDefault('grade', false);
