@@ -323,11 +323,12 @@ class mod_zoom_webservice {
      */
     protected function _database_to_api($zoom) {
         global $CFG;
-
+        
         $data = array(
             'topic' => $zoom->name,
             'settings' => array(
                 'host_video' => (bool) ($zoom->option_host_video),
+                'mute_upon_entry' => (bool) ($zoom->option_mute_upon_entry),
                 'audio' => $zoom->option_audio,
                 'auto_recording' => $zoom->auto_recording
             )

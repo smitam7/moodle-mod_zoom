@@ -268,16 +268,24 @@ function xmldb_zoom_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2018091400, 'zoom');
     }
 
-    if ($oldversion < 2019021200) {
+    if ($oldversion < 2019021500) {
         //Define field auto_recording to be added to zoom
         $table = new xmldb_table('zoom');
-        $field = new xmldb_field('auto_recording',XMLDB_TYPE_CHAR, '9',null, XMLDB_NOTNULL, null, 'none', 'alternative_hosts');
+        $field = new xmldb_field('auto_recording', XMLDB_TYPE_CHAR, '9', null, XMLDB_NOTNULL, null, 'none', 'alternative_hosts');
 
         // Conditionally launch add field auto_recording.
-        if ($dbman->field_exists($table, $field)) {
-            $dbman->drop_field($table, $field);
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
         }
-        upgrade_mod_savepoint(true, 2019021200, 'zoom');
+
+        //Define field option_mute_upon_entry to be added to zoom
+        $field = new xmldb_field('option_mute_upon_entry', XMLDB_TYPE_INTEGER, 1, null, XMLDB_NOTNULL, null, 0, 'auto_recording');
+
+        // Conditionally launch add field option_mute_upon_entry.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+        upgrade_mod_savepoint(true, 2019021500, 'zoom');
     }
 
     return true;

@@ -105,6 +105,10 @@ if ($ADMIN->fulltree) {
             get_string('option_participants_video', 'zoom'), '', 1, 1, 0);
     $settings->add($defaultparticipantsvideo);
 
+    $defaultmuteoption = new admin_setting_configcheckbox('mod_zoom/defaultmuteoption',
+        get_string('option_mute_upon_entry', 'zoom'), '', 0, 1, 0);
+    $settings->add($defaultmuteoption);
+
     $audiochoices = array(ZOOM_AUDIO_TELEPHONY => get_string('audio_telephony', 'zoom'),
                           ZOOM_AUDIO_VOIP => get_string('audio_voip', 'zoom'),
                           ZOOM_AUDIO_BOTH => get_string('audio_both', 'zoom'));
